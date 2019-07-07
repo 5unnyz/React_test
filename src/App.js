@@ -10,18 +10,24 @@ state = {
     {name: 'a' , age: 25},
     {name: 'b' , age: 28},
     {name: 'c' , age: 29}
-  ]
+  ],
+  showperson : true
+
 }
+
+
+
 secondstate ={
   enemy:[
     {code:'aa' , time:'0700'},
     {code:'bb' , time:'0800'},
-    {code:'cc' , time:'0900'}
+    {code:'cc' , time:'0d900'}
     
 
 
     
   ]
+  
   
 }
  Changestate = () => {
@@ -34,18 +40,41 @@ secondstate ={
     ]
   })
 }
+changename = (event) =>
+{
+  this.setState({
+    Friends:[
+    {name: 'e' , age: 25},
+    {name: event.target.value , age: 28},
+    {name: 'g' , age: 29}
+    ]
+  })
+}
+toggledetail = () =>
+{
+  const doesshow = this.state.showperson;
+  console.log(doesshow);
+  this.setState({showperson:!doesshow})
+}
 
   render () {
   return (
     <div className="App">
+      <p>
+        <button onClick = {this.toggledetail}>For Change</button>
+
+      </p>
       <p>hi</p>
+      {this.state.showperson ? 
+      <div>
       <p>
         <Data
         name= {this.state.Friends[0].name}
         age ={this.state.Friends[0].age} />
         <Data
         name= {this.state.Friends[1].name}
-        age ={this.state.Friends[1].age}/>
+        age ={this.state.Friends[1].age}
+        changed={this.changename}/>
         <Data
         name= {this.state.Friends[2].name}
         age ={this.state.Friends[2].age}
@@ -56,10 +85,9 @@ secondstate ={
         code = {this.secondstate.enemy[0].code}
         time = {this.secondstate.enemy[0].time} />
         </p>
-        <p>
-        <button onClick = {this.Changestate}>For Change</button>
-
-      </p>
+        </div> :null
+      }
+        
     </div>
   );
   }
